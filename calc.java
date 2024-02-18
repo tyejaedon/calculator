@@ -21,7 +21,7 @@ public abstract class calc extends operations{
             if(i  < expression.length()-1){
                 char x = expression.charAt(i+1);
                 
-                if((isOperator(c)&& isOperator(x))|| (isOperator(c) && i == 0)){
+                if((isOperator(c)&& isOperator(x))|| (isOperator(c) && i == 0 && c != '\u221A')){
                     throw new IllegalArgumentException("Syntax Error");
                 }
             }
