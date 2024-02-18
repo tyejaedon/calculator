@@ -21,7 +21,7 @@ public abstract class calc extends operations{
             if(i  < expression.length()-1){
                 char x = expression.charAt(i+1);
                 
-                if(isOperator(c)&& isOperator(x) && x != '-'){
+                if((isOperator(c)&& isOperator(x))|| (isOperator(c) && i == 0)){
                     throw new IllegalArgumentException("Syntax Error");
                 }
             }
@@ -109,7 +109,7 @@ public abstract class calc extends operations{
             if (c == 'c' && i + 2 < expression.length() && expression.substring(i, i + 3).equals("cos")) {
                 i += 2 ; // Skip "sin"
                 token = 1;
-                System.out.println("rgkbmgkbm");
+               
                 int startIndex = expression.indexOf("(", i);
                 int endIndex = expression.indexOf(")", startIndex + 1);
                 if (startIndex < 0 || endIndex < 0) {
@@ -121,9 +121,7 @@ public abstract class calc extends operations{
                 double result = Math.cos(argumentValue);
                 
                 numberStack.push(result);
-                if(expression.length() == 6){
-                    return numberStack.pop();
-                }
+               
                
               
                 
@@ -168,10 +166,10 @@ public abstract class calc extends operations{
             
            
 
-           else if (Character.isDigit(c) || c == '.' ) {
+           else if (Character.isDigit(c) || c == '.' || c == '-') {
                 StringBuilder sb = new StringBuilder();
                 
-                while (i < expression.length() &&(Character.isDigit(expression.charAt(i))|| expression.charAt(i)== '.')){
+                while (i < expression.length() &&(Character.isDigit(expression.charAt(i))|| expression.charAt(i)== '.' || expression.charAt(i)== '-')){
 
                 
                     sb.append(expression.charAt(i++));
@@ -332,7 +330,7 @@ public abstract class calc extends operations{
 
     public  boolean isOperator(char c) 
     {
-        return c == '+' || c == '-' || c == '*' || c == '/' || c == '^'|| c =='\u221A' || c == '%';
+        return c == '+' || c == '\u2013' || c == '*' || c == '/' || c == '^'|| c =='\u221A' || c == '%';
     }
 
     private  boolean hasHigherPrecedence(char op1, char op2) {
@@ -344,33 +342,10 @@ public abstract class calc extends operations{
             return true;
         }
         else{
-            return (op1 == '*' && op2 == '/') && (op2 == '+' || op2 == '-');
+            return (op1 == '*' && op2 == '/') && (op2 == '+' || op2 == '\u2013');
         }
         
     }
-    
-    private boolean isnegaitive(String expression){
-        for (int i = 0; i < expression.length(); i++) {
-         
-            char c = expression.charAt(i);
-           
-            if(i  < expression.length()-1){
-                char x = expression.charAt(i+1);
-               
-                if((c == '-' && Character.isDigit(x)) || (x == '-' && isOperator(c))){
-                  return true;
-                }
-                else{
-                  return false;
-                }
-                
-                
-
-                
-            }
-    }
-    return false;
-}
 
 
 @Override
@@ -384,7 +359,7 @@ public double performOperation(double operand1, double operand2, char operator) 
         return operand1 % operand2;
         case '+':
             return operand1 + operand2;
-        case '-':
+        case '\u2013':
             return operand1 - operand2;
         case '*':
             return operand1 * operand2;

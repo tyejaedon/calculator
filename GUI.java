@@ -28,8 +28,8 @@ public class GUI extends calc implements ActionListener {
     JButton buttonMul = new JButton("X");
     JButton buttonDiv = new JButton("/");
     JButton buttonPlus = new JButton("+");
-    JButton buttonMinus = new JButton("-");
-    JButton buttonSquare = new JButton("x\u00B2");
+    JButton buttonMinus = new JButton("\u2013");
+    JButton buttonSquare = new JButton("+/-");
     JButton buttonOPBrac = new JButton("(");
     JButton buttonCLBrac = new JButton(")");
     JButton buttonlog10 = new JButton("log()");
@@ -243,14 +243,14 @@ public class GUI extends calc implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String Current = textField.getText();
-                textField.setText(Current + "-");
+                textField.setText(Current + "\u2013");
             }
         });
         buttonSquare.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String Current = textField.getText();
-                textField.setText(Current + "^2");
+                textField.setText(Current + "-");
             }
         });
         buttonReciprocal.addActionListener(new ActionListener() {
