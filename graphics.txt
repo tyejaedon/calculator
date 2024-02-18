@@ -1,0 +1,249 @@
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+public class GUI implements ActionListener {
+    double number, answer;
+    int calculation;
+    JTextField input = new JTextField();
+
+
+    JFrame frame;
+    JLabel label = new JLabel();
+    JTextField textField = new JTextField();
+    JButton buttonZero = new JButton("0");
+    JButton buttonOne = new JButton("1");
+    JButton buttonTwo = new JButton("2");
+    JButton buttonThree = new JButton("3");
+    JButton buttonFour = new JButton("4");
+    JButton buttonFive = new JButton("5");
+    JButton buttonSix = new JButton("6");
+    JButton buttonSeven = new JButton("7");
+    JButton buttonEight = new JButton("8");
+    JButton buttonNine = new JButton("9");
+    JButton buttonDot = new JButton(".");
+    JButton buttonClear = new JButton("C");
+    JButton buttonDelete = new JButton("DEL");
+    JButton buttonEqual = new JButton("=");
+    JButton buttonMul = new JButton("X");
+    JButton buttonDiv = new JButton("/");
+    JButton buttonPlus = new JButton("+");
+    JButton buttonMinus = new JButton("-");
+    JButton buttonSquare = new JButton("x\u00B2");
+    // the \u00B2 is for ^2
+    JButton buttonReciprocal = new JButton("1/x");
+    JButton buttonSqrt = new JButton("\u221A");
+    // the \u221A is for square-root symbol
+    JButton buttonSin = new JButton("sin");
+    JButton buttonCos = new JButton("cos");
+    JButton buttonTan = new JButton("tan");
+    JButton buttonExponent = new JButton("e");
+    JButton buttonPie = new JButton("03C0");
+    JButton buttonPercent = new JButton("%");
+
+    Color black = new Color(32,32,32);
+    Color grey = new Color(128,128,128);
+    Color orange = new Color(255, 153,51);
+    Color darkgrey = new Color(64,64,64);
+
+  
+    public void prepareGUI() {
+        frame = new JFrame();
+        frame.setTitle("Calculator");
+        frame.setSize(420, 500);
+        frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(black);
+        frame.setResizable(true);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    public void addComponents(){
+    // positioning them for all x.y.width, height set them cause mine is not running i dont know why
+        label.setBounds(250, 0, 50, 50);
+        label.setForeground(Color.black);
+        frame.add(label);
+
+        textField.setBounds(0, 0, 420, 100);
+        textField.setFont(new Font("Arial", Font.BOLD, 20));
+        textField.setEditable(false);
+        textField.setHorizontalAlignment(SwingConstants.RIGHT);
+        frame.add(textField);
+
+        buttonSqrt.setBounds(0, 300, 70, 100);
+        buttonSqrt.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonSqrt.setBackground(darkgrey);
+        frame.add(buttonSqrt);
+
+        buttonSquare.setBounds(70, 300, 70, 100);
+        buttonSquare.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonSquare.setBackground(darkgrey);
+        frame.add(buttonSquare);
+
+        buttonClear.setBounds(140, 320, 70, 80);
+        buttonClear.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonClear.setBackground(darkgrey);
+        frame.add(buttonClear);
+
+        buttonDelete.setBounds(210, 320, 70, 80);
+        buttonDelete.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonDelete.setBackground(darkgrey);
+        frame.add(buttonDelete);
+
+        buttonPercent.setBounds(280, 320, 70, 80);
+        buttonPercent.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonPercent.setBackground(darkgrey);
+        frame.add(buttonPercent);
+
+        buttonDiv.setBounds(350, 320, 70, 80);
+        buttonDiv.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonDiv.setBackground(orange);
+        frame.add(buttonDiv);
+
+        buttonReciprocal.setBounds(0, 200, 70, 100);
+        buttonReciprocal.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonReciprocal.setBackground(darkgrey);
+        frame.add(buttonReciprocal);
+
+        buttonExponent.setBounds(70,200 , 70, 100);
+        buttonExponent.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonExponent.setBackground(darkgrey);
+        frame.add(buttonExponent);
+
+        buttonSeven.setBounds(140,240 , 70, 80);
+        buttonSeven.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonSeven.setBackground(grey);
+        frame.add(buttonSeven);
+
+        buttonEight.setBounds(210,240,  70, 80);
+        buttonEight.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonEight.setBackground(grey);
+        frame.add(buttonEight);
+
+        buttonNine.setBounds(280,240 , 70, 80);
+        buttonNine.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonNine.setBackground(grey);
+        frame.add(buttonNine);
+
+        buttonMul.setBounds(350,240 , 70, 80);
+        buttonMul.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonMul.setBackground(orange);
+        frame.add(buttonMul);
+
+        buttonPie.setBounds(0, 100, 70, 100);
+        buttonPie.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonPie.setBackground(darkgrey);
+        frame.add(buttonPie);
+
+        buttonCos.setBounds(70,100 , 70, 100);
+        buttonCos.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonCos.setBackground(darkgrey);
+        frame.add(buttonCos);
+
+        buttonFour.setBounds(140,160 , 70, 80);
+        buttonFour.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonFour.setBackground(grey);
+        frame.add(buttonFour);
+
+        buttonFive.setBounds(210,160 , 70, 80);
+        buttonFive.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonFive.setBackground(grey);
+        frame.add(buttonFive);
+
+        buttonSix.setBounds(280,160 , 70, 80);
+        buttonSix.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonSix.setBackground(grey);
+        frame.add(buttonSix);
+
+        buttonMinus.setBounds(350,160 , 70, 80);
+        buttonMinus.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonMinus.setBackground(orange);
+        frame.add(buttonMinus);
+
+        buttonSin.setBounds(0, 0, 70, 100);
+        buttonSin.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonSin.setBackground(darkgrey);
+        frame.add(buttonSin);
+
+        buttonTan.setBounds(70, 0, 70, 100);
+        buttonTan.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonTan.setBackground(darkgrey);
+        frame.add(buttonTan);
+
+        buttonOne.setBounds(140, 80, 70, 80);
+        buttonOne.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonOne.setBackground(grey);
+        frame.add(buttonOne);
+
+        buttonTwo.setBounds(210, 80, 70, 80);
+        buttonTwo.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonTwo.setBackground(grey);
+        frame.add(buttonTwo);
+
+        buttonThree.setBounds(280, 80, 70, 80);
+        buttonThree.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonThree.setBackground(grey);
+        frame.add(buttonThree);
+
+        buttonPlus.setBounds(350, 80, 70, 80);
+        buttonPlus.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonPlus.setBackground(orange);
+        frame.add(buttonPlus);
+
+        buttonZero.setBounds(140, 0, 140, 160);
+        buttonZero.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonZero.setBackground(grey);
+        frame.add(buttonZero);
+
+        buttonDot.setBounds(280, 0, 70, 80);
+        buttonDot.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonDot.setBackground(grey);
+        frame.add(buttonDot);
+
+        buttonEqual.setBounds(350, 0, 70, 80);
+        buttonEqual.setFont(new Font("Arial", Font.BOLD, 18));
+        buttonEqual.setBackground(orange);
+        frame.add(buttonEqual);
+
+
+
+    }
+    public void addActionEvent(){
+        buttonZero.addActionListener(this);
+        
+        buttonOne.addActionListener(this);
+        buttonTwo.addActionListener(this);
+        buttonThree.addActionListener(this);
+        buttonFour.addActionListener(this);
+        buttonFive.addActionListener(this);
+        buttonSix.addActionListener(this);
+        buttonSeven.addActionListener(this);
+        buttonEight.addActionListener(this);
+        buttonNine.addActionListener(this);
+        buttonDot.addActionListener(this);
+        buttonClear.addActionListener(this);
+        buttonDelete.addActionListener(this);
+        buttonEqual.addActionListener(this);
+        buttonMul.addActionListener(this);
+        buttonDiv.addActionListener(this);
+        buttonPlus.addActionListener(this);
+        buttonMinus.addActionListener(this);
+        buttonSquare.addActionListener(this);
+        buttonReciprocal.addActionListener(this);
+        buttonSqrt.addActionListener(this);
+        buttonSin.addActionListener(this);
+        buttonCos.addActionListener(this);
+        buttonTan.addActionListener(this);
+        buttonExponent.addActionListener(this);
+        buttonPie.addActionListener(this);
+        buttonPercent.addActionListener(this);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source =e.getSource();
+    }
+    void Calculator() {
+        prepareGUI();
+        addComponents();
+        addActionEvent();
+    }
+}
