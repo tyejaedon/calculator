@@ -341,8 +341,11 @@ public abstract class calc extends operations{
         }else if(op1 == '%'){
             return true;
         }
+        else if(op1 == '*' || op2 == '*'){
+            return true;
+        }
         else{
-            return (op1 == '*' && op2 == '/') && (op2 == '+' || op2 == '\u2013');
+            return (op2 == '+' || op2 == '\u2013');
         }
         
     }
