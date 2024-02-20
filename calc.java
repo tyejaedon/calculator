@@ -38,7 +38,7 @@ public abstract class calc extends operations{
                 }
 
                 String argument = expression.substring(startIndex + 1, endIndex);
-                double argumentValue = Double.parseDouble(argument); // Recursively evaluate the argument
+                double argumentValue = evaluate(argument); // Recursively evaluate the argument
                 double result = Math.asin(argumentValue);
                
                 
@@ -128,7 +128,7 @@ public abstract class calc extends operations{
             }
            else if (c == 't' && i + 2 < expression.length() && expression.substring(i, i + 3).equals("tan")) {
                 i += 2 ; // Skip "tan"
-                token = 0;
+                token = 1;
                 int startIndex = expression.indexOf("(", i);
                 int endIndex = expression.indexOf(")", startIndex + 1);
                 if (startIndex < 0 || endIndex < 0) {
@@ -174,7 +174,7 @@ public abstract class calc extends operations{
                 
                     sb.append(expression.charAt(i++));
                     System.out.println(sb);
-                   
+                
 
                 
                 }
@@ -209,7 +209,10 @@ public abstract class calc extends operations{
                    
                 }
                 // Remove the '(' from the stack
-                operatorStack.pop();
+                if(token != 1 || token_a != 1){
+                    operatorStack.pop();
+                }
+               
 
             } else if(c=='\u221A'){
                 token_sqrt = 1;
@@ -281,16 +284,18 @@ public abstract class calc extends operations{
             
         }
        token_a = 0;
+
+       if(token==1 && numberStack.size() >= 2){
+                 
+        numberStack.remove(1);
+        
+    }
+   
+    token = 0;
         // Process remaining operators after handling all characters
         while (!operatorStack.isEmpty()) {
             System.out.println(numberStack);
-            if(token==1 && numberStack.size() >= 2){
-                 
-                numberStack.remove(1);
-                
-            }
-           
-            token = 0;
+          
            
             if(numberStack.size()!= 1){
                 double operand2 = numberStack.pop();
@@ -330,7 +335,7 @@ public abstract class calc extends operations{
 
     public  boolean isOperator(char c) 
     {
-        return c == '+' || c == '\u2013' || c == '*' || c == '/' || c == '^'|| c =='\u221A' || c == '%';
+        return c == '+' || c == '\u2013' || c == 'x' || c == '/' || c == '^'|| c =='\u221A' || c == '%';
     }
 
     private  boolean hasHigherPrecedence(char op1, char op2) {
@@ -364,7 +369,7 @@ public double performOperation(double operand1, double operand2, char operator) 
             return operand1 + operand2;
         case '\u2013':
             return operand1 - operand2;
-        case '*':
+        case 'x':
             return operand1 * operand2;
         case '/':
             return operand1 / operand2;

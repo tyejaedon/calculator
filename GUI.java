@@ -222,7 +222,7 @@ public class GUI extends calc implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String Current = textField.getText();
-                textField.setText(Current + "*");
+                textField.setText(Current + "x");
             }
         });
         buttonDiv.addActionListener(new ActionListener() {
@@ -368,6 +368,14 @@ public class GUI extends calc implements ActionListener {
                 // TODO Auto-generated method stub
                 String Current = textField.getText();
                 textField.setText(Current + "^");
+            }
+        });
+        buttonFactorial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                String Current = textField.getText();
+                textField.setText(Current + "!");
             }
         });
     }
