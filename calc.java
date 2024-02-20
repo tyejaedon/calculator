@@ -58,7 +58,7 @@ public abstract class calc extends operations{
                 }
 
                 String argument = expression.substring(startIndex + 1, endIndex);
-                double argumentValue = Double.parseDouble(argument); // Recursively evaluate the argument
+                double argumentValue = evaluate(argument); // Recursively evaluate the argument
                 double result = Math.acos(argumentValue);
                
                 
@@ -107,7 +107,7 @@ public abstract class calc extends operations{
                 
             }
             if (c == 'c' && i + 2 < expression.length() && expression.substring(i, i + 3).equals("cos")) {
-                i += 2 ; // Skip "sin"
+                i += 2 ; // Skip "cos"
                 token = 1;
                
                 int startIndex = expression.indexOf("(", i);
@@ -152,7 +152,7 @@ public abstract class calc extends operations{
                 if (startIndex < 0 || endIndex < 0) {
                     throw new IllegalArgumentException("Missing parentheses for log argument");
                 }
-                System.out.println("fnfjnfj");
+          
                 String argument = expression.substring(startIndex + 1, endIndex);
                 double argumentValue = evaluate(argument); // Recursively evaluate the argument
                 double result = Math.log10(argumentValue);
@@ -209,7 +209,7 @@ public abstract class calc extends operations{
                    
                 }
                 // Remove the '(' from the stack
-                if(token != 1 || token_a != 1){
+                if(!operatorStack.empty()){
                     operatorStack.pop();
                 }
                
@@ -280,14 +280,14 @@ public abstract class calc extends operations{
            
         }
         if(token_a ==1 && numberStack.size() >=2){
-            numberStack.remove(1);
+            numberStack.pop();
             
         }
        token_a = 0;
 
        if(token==1 && numberStack.size() >= 2){
                  
-        numberStack.remove(1);
+        numberStack.pop();
         
     }
    
